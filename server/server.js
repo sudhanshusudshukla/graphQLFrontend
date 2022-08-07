@@ -1,10 +1,10 @@
 const express = require("express");
 const models = require("./models");
-const expressGraphQL = require("express-graphql");
+const expressGraphQL = require("express-graphql").graphqlHTTP;
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const schema = require("./schema/schema");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+//const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const app = express();
 
@@ -19,7 +19,6 @@ if (!MONGO_URI) {
 mongoose.Promise = global.Promise;
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
-  useFindAndModify: false,
   useUnifiedTopology: true,
 });
 mongoose.connection
