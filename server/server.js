@@ -1,6 +1,6 @@
 const express = require("express");
 const models = require("./models");
-const expressGraphQL = require("express-graphql").graphqlHTTP;
+const { graphqlHTTP } = require("express-graphql");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const schema = require("./schema/schema");
@@ -10,8 +10,7 @@ const app = express();
 
 // Replace with your mongoLab URI
 //old way of connection
-const MONGO_URI =
-  "mongodb+srv://sudshukla:sud1234@cluster-graphqlfe.7a4bo5s.mongodb.net/?retryWrites=true&w=majority";
+const MONGO_URI = "YOUR URL";
 if (!MONGO_URI) {
   throw new Error("You must provide a MongoLab URI");
 }
@@ -42,7 +41,7 @@ client.connect((err) => {
 app.use(bodyParser.json());
 app.use(
   "/graphql",
-  expressGraphQL({
+  graphqlHTTP({
     schema,
     graphiql: true,
   })
