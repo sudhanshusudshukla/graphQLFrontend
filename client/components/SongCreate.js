@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
+import { Link } from "react-router";
 
 const SongCreate = () => {
   const [addSong, { data, loading }] = useMutation(mutation);
@@ -18,6 +19,7 @@ const SongCreate = () => {
 
   return (
     <div>
+      <Link to="/">Back</Link>
       <h3>Create a New Song</h3>
       <form onSubmit={onSubmit}>
         <label>Song Title</label>
