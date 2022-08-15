@@ -1,5 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
+import { Router, Route, hashHistory, IndexRoute } from "react-router";
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,6 +8,8 @@ import {
   HttpLink,
 } from "@apollo/client";
 import SongList from "./components/songList";
+import App from "./components/App";
+import SongCreate from "./components/SongCreate";
 
 const client = new ApolloClient({
   // ...other arguments...
@@ -14,13 +17,14 @@ const client = new ApolloClient({
   link: new HttpLink({ uri: "/graphql", fetch }),
 });
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+ReactDOM.render(
   <ApolloProvider client={client}>
-    <React.StrictMode>
-      <div>Sudhanshu</div>
-
-      <SongList />
-    </React.StrictMode>
-  </ApolloProvider>
+    <Router history={hashHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={SongList} />
+        <Route path="song/new" component={SongCreate} />
+      </Route>
+    </Router>
+  </ApolloProvider>,
+  document.getElementById("root")
 );
